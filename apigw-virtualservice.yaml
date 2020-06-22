@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: apigw-virtualservice
+spec:
+  hosts:
+  - "apigw-cloud-lab.apps.cp41apps.notesfromchechu.com"
+  gateways:
+  - apigw-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: apigw
+        port:
+          number: 3000
+    

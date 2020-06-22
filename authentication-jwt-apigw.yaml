@@ -1,0 +1,22 @@
+kind: Policy
+apiVersion: authentication.istio.io/v1alpha1
+metadata:
+  name: jwt-auth-apigw-policy
+  namespace: cloud-lab
+spec:
+  targets:
+    - name: apigw
+  peers:
+    - mtls: {}
+  origins:
+    - jwt:
+        audiences:
+          - apigw-cloud-lab
+        issuer: chechu
+        jwksUri: >-
+          https://gist.githubusercontent.com/chechuironman/716dbfdbdf113899f924fe62a229fa96/raw/f7ac8a6dc317e635a99ac129cdb39038c3df0a7e/jwt.json
+        trigger_rules:
+          - excluded_paths:
+              - exact: /api/users/login
+              - exact: /api/users/register
+  principalBinding: USE_ORIGIN

@@ -1,0 +1,18 @@
+kind: Policy
+apiVersion: authentication.istio.io/v1alpha1
+metadata:
+  name: deny-all-services
+  namespace: cloud-lab
+spec:
+  targets:
+    - name: ui
+    - name: management
+    - name: usertoken
+    - name: k8smanager
+    - name: mongodb-cloud-lab
+  peers:
+    - mtls: {}
+  peerIsOptional: ~
+  origins: ~
+  originIsOptional: ~
+  principalBinding: ~
