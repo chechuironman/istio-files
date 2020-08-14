@@ -1,0 +1,50 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-management-mongo
+spec:
+  selector:
+    matchLabels:
+        app: mongo
+  rules:
+  - from:
+    - source:
+        principals:
+          ["cluster.local/ns/cloud-lab/sa/management"]
+    to:
+    - operation:
+        ports: ["27017"]
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+    name: allow-auth-mongo
+spec:
+    selector:
+      matchLabels:
+        app: mongo
+    rules:
+    - from:
+      - source:
+          principals:
+            ["cluster.local/ns/cloud-lab/sa/usertoken"]
+      to:
+      - operation:
+          ports: ["27017"]
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+    name: allow-k8s-mongo
+spec:
+    selector:
+      matchLabels:
+        app: mongo
+    rules:
+    - from:
+      - source:
+          principals:
+            ["cluster.local/ns/cloud-lab/sa/k8smanager"]
+      to:
+      - operation:
+          ports: ["27017"]

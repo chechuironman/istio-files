@@ -1,0 +1,47 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-apigw-auth
+spec:
+  selector:
+    matchLabels:
+      app: auth
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/cloud-lab/sa/apigw"]
+    to:
+    - operation:
+        ports: ["3000"]
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+    name: allow-apigw-k8s-manager
+spec:
+  selector:
+    matchLabels:
+      app: k8s-manager
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/cloud-lab/sa/apigw"]
+    to:
+    - operation:
+        ports: ["8080"]
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+    name: allow-apigw-management
+spec:
+    selector:
+      matchLabels:
+        app: management
+    rules:
+    - from:
+      - source:
+          principals: ["cluster.local/ns/cloud-lab/sa/apigw"]
+    to:
+    - operation:
+        ports: ["3000"]

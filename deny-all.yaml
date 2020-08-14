@@ -1,0 +1,36 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-all-auth
+spec:
+  selector:
+    matchLabels:
+      app: auth
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+    name: deny-all-k8s-manager
+spec:
+  selector:
+    matchLabels:
+        app: k8s-manager
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+    name: deny-all-management
+spec:
+  selector:
+    matchLabels:
+        app: management
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+    name: deny-all-mongo
+spec:
+  selector:
+    matchLabels:
+      name: mongodb-cloud-lab
+---
