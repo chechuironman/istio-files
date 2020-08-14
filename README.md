@@ -4,4 +4,3 @@ Istio files used to set the network pollicies for the OCP-Lab microservice app p
 
 ![Flow](Istio-topology.jpg)
 # ocp-lab-istio-files
-# ocp-lab-istio-files
